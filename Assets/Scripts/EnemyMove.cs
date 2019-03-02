@@ -18,8 +18,15 @@ public class EnemyMove : MonoBehaviour {
     [SerializeField]
     private float agroDistance;
 
+    private Vector3 origin;
 
+    [SerializeField]
+    private float   patrolRange;
 
+    [SerializeField]
+    private float   patrolCoolDown;
+    private float   patrolTime;
+    Vector2 movePos = Vector2.zero;
 
 
 
@@ -28,55 +35,63 @@ public class EnemyMove : MonoBehaviour {
         isAgro = false;
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();       
-
-
+        origin = transform.position;
+        patrolTime = patrolCoolDown;
         //direction = Random.Range(1, 8);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+        //In here i just seperated the part where he know when to follow the play and following the player
         float Distance = Vector2.Distance(transform.position, player.position);
 
-        if (isAgro == true || (Distance <= agroDistance && Distance > stopingDistance))
-        {
+        if (Distance <= agroDistance && Distance > stopingDistance)
             isAgro = true;
-            rb.velocity = Vector2.zero;
-            transform.position = Vector2.MoveTowards(transform.position, player.position, agroSpeed);
-        }
-        else if (isAgro == false)
-        {
-
-
-
-
-
-            if (direction == 1)
-                rb.velocity = new Vector2(speed, 0);
-            if (direction == 2)
-                rb.velocity = new Vector2(0, speed);
-            if (direction == 3)
-                rb.velocity = new Vector2(speed, speed);
-            if (direction == 4)
-                rb.velocity = new Vector2(-speed, -speed);
-            if (direction == 5)
-                rb.velocity = new Vector2(-speed, speed);
-            if (direction == 6)
-                rb.velocity = new Vector2(speed, -speed);
-            if (direction == 7)
-                rb.velocity = new Vector2(-speed, 0);
-            if (direction == 8)
-                rb.velocity = new Vector2(0, -speed);
-        }
         else
             isAgro = false;
+        if (isAgro)
+            rb.velocity = (player.position - this.transform.position) * agroSpeed;
+        else if (Distance > stopingDistance)
+            Patrol();
+        else
+            rb.velocity = Vector2.zero;
+
 	}
 
-	void OnCollisionEnter2D(Collision2D collision)
+    void    Patrol()
+    {
+
+        if (patrolCoolDown >= 0)
+        {
+            //Make sure the enemy doesn't move too far away from its starting position
+            if (transform.position.x > origin.x + patrolRange)
+                movePos.x *= -1;
+            else if (transform.position.x < origin.x - patrolRange)
+                movePos.x *= -1;
+
+            if (transform.position.y > origin.y + patrolRange)
+                movePos.y *= -1;
+            else if (transform.position.y < origin.y - patrolRange)
+                movePos.y *= -1;
+            
+            rb.velocity = movePos * speed;
+            patrolCoolDown -= Time.deltaTime;
+        }
+        else
+        {
+            movePos = new Vector2  (Random.RandomRange(-0.5f, 0.5f), Random.RandomRange(-0.5f, 0.5f)); // Make every move a little random
+            rb.velocity = Vector2.zero;
+            patrolCoolDown = patrolTime; //Reseting the patrol cooldown
+        }
+    }
+
+	/*void OnCollisionEnter2D(Collision2D collision)
 	{
         if (collision.gameObject.tag == "Borders")
         {
-            speed = -speed;                                             //reverse directions if it hit walls
+            agroSpeed = -agroSpeed;                                             //reverse directions if it hit walls
             //direction = Random.Range(1, 8);
         }
-	}
+	}*/
 }

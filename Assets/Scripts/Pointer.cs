@@ -13,6 +13,9 @@ public class Pointer : MonoBehaviour {
 	private	Transform	shotPoint;
 
 	[SerializeField]
+	private GameObject fireParticales;
+
+	[SerializeField]
 	private	float	coolDown;
 	private	float	coolDownOri;
 
@@ -27,19 +30,25 @@ public class Pointer : MonoBehaviour {
 		FireBall();
 	}
 
+	IEnumerator	FireParts()
+	{
+		yield return new WaitForSeconds(0.05f);
+		GameObject parts = Instantiate(fireParticales, shotPoint.position, transform.rotation);
+		Destroy(parts, 0.2f);
+	}
+
 	void	FireBall()
 	{
-		if (coolDown <= 0)
+		if (Input.GetMouseButton(0))
 		{
-			if (Input.GetMouseButtonDown(0))
+			if (coolDown <= 0)
 			{
 				Instantiate(fireBall, shotPoint.position, transform.rotation);
 				coolDown = coolDownOri;
+				StartCoroutine(FireParts());
 			}
-		}
-		else
-		{
-			coolDown -= Time.deltaTime;
+			else
+				coolDown -= Time.deltaTime;
 		}
 
 	}

@@ -35,7 +35,7 @@ public class FireBall : MonoBehaviour {
 	{
 		if (coll.gameObject.tag == "Enemy")
 		{
-			Destroy(coll.gameObject);
+			coll.gameObject.GetComponent<EnemySystem>().TakeDamage(5f);
 			Destroy(this.gameObject);
 		}
 	}

@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent (typeof (Rigidbody2D))]
 public class PlayerMovements : MonoBehaviour {
 
+	[SerializeField]
+	private	Animator anim;
 
 	[SerializeField]
 	private	float speed;
@@ -17,11 +19,13 @@ public class PlayerMovements : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
+		anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		Move();
+		AttackAnimation();
 	}
 
 	void	Move()
@@ -40,8 +44,23 @@ public class PlayerMovements : MonoBehaviour {
 		else
 			dir_y = 0;
 
+		//This part is for the Move animation
+		if (dir_y == 0 && dir_x == 0)
+			anim.SetBool("Move", false);
+		else
+			anim.SetBool("Move", true);
 		//rb.AddForce(new Vector2(dir_x * speed, dir_y * speed));
 		rb.velocity = new Vector2(/*rb.velocity.x + */dir_x * speed,/* rb.velocity.y + */dir_y * speed);
+	}
+
+	void	AttackAnimation()
+	{
+		//This part is for the Attack animation
+		if (Input.GetMouseButton(0))
+			anim.SetBool("Attack", true);
+		//if (Input.GetMouseButtonUp(0))
+		else
+			anim.SetBool("Attack", false);
 	}
 
 }
