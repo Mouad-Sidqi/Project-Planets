@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent (typeof (BoxCollider2D))]
-[RequireComponent (typeof (Rigidbody2D))]
 public class PlayerMovements : MonoBehaviour {
 
 	[SerializeField]
@@ -58,7 +56,6 @@ public class PlayerMovements : MonoBehaviour {
 		//This part is for the Attack animation
 		if (Input.GetMouseButton(0))
 			anim.SetBool("Attack", true);
-		//if (Input.GetMouseButtonUp(0))
 		else
 			anim.SetBool("Attack", false);
 	}
