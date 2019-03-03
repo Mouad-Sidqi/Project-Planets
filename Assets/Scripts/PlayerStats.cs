@@ -11,6 +11,9 @@ public class PlayerStats : MonoBehaviour {
     [SerializeField]
 	private	Image healthBar;
 
+    [SerializeField]
+    private Image timeBar;
+
 	[SerializeField]
 	private	float	lerpSpeed;
 
@@ -28,6 +31,9 @@ public class PlayerStats : MonoBehaviour {
     [SerializeField]
     private GameObject fire;
 
+    [SerializeField]
+    private float typeTimer;
+
 	// Use this for initialization
 	void Start () {
 		//currHP = maxHP;
@@ -35,6 +41,7 @@ public class PlayerStats : MonoBehaviour {
         maxHP = playerType.GetComponent<PlayerType>().maxHealth;
         currHP = maxHP;
         typeCounter = 0;
+        typeTimer = 11;
 	}
 
 	
@@ -46,7 +53,8 @@ public class PlayerStats : MonoBehaviour {
             typeCounter += Time.deltaTime;
         else if (typeCounter >= 20)
             typeCounter = 0;
-       
+        timeBar.fillAmount = typeTimer / 10;
+        typeTimer -= Time.deltaTime;
 	}
 
     void    ManageType()
@@ -57,6 +65,8 @@ public class PlayerStats : MonoBehaviour {
             fire.active = true;
             ice.active = false;
             playerType = GameObject.Find("PlayerRange");
+            if (typeTimer <= 0)
+                typeTimer = 10;
         }
         else if (typeCounter >= 10f && typeCounter < 20)
         {
@@ -64,6 +74,8 @@ public class PlayerStats : MonoBehaviour {
             fire.active = false;
             ice.active = true;
             playerType = GameObject.Find("PlayerMelee");
+            if (typeTimer <= 0)
+                typeTimer = 10;
         }
     }
 
