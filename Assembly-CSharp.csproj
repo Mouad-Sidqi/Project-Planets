@@ -64,6 +64,7 @@
      <Compile Include="Assets\Scripts\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\PlayerType.cs" />
      <Compile Include="Assets\Scripts\PointerFire.cs" />
+     <Compile Include="Assets\Scripts\Spawner.cs" />
      <Compile Include="Assets\Scripts\SwordAttack.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>/Users/helbouaz/Desktop/Project-Planets/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
