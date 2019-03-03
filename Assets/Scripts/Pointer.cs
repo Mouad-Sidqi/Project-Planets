@@ -17,6 +17,7 @@ public class Pointer : MonoBehaviour {
 
 	[SerializeField]
 	private	float	coolDown;
+    [SerializeField]
 	private	float	coolDownOri;
 
 	void	Start()
