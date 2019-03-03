@@ -24,5 +24,13 @@ public class PlayerStats : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, currHP / maxHP, lerpSpeed);
+		if (currHP <= 0)
+			Destroy(this.gameObject);
 	}
+
+	public	void	TakeDamage(float damage)
+	{
+		currHP -= damage;
+	}
+
 }
