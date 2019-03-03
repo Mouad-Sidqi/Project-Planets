@@ -17,9 +17,24 @@ public class SwordAttack : MonoBehaviour {
 	private	float	coolDown;
 	private	float	coolDownOri;
 
+	[SerializeField]
+	private	GameObject player;
+
+	[SerializeField]
+	private	Animator iceAnim;
+
 	void	Start()
 	{
+		player = transform.parent.transform.parent.gameObject;
 		coolDownOri = coolDown;
+		iceAnim = transform.parent.gameObject.GetComponent<Animator>();
+	}
+
+	void	Update()
+	{
+		Animate();
+		if (coolDown > 0)
+			coolDown -= Time.deltaTime;
 	}
 
 	void	FixedUpdate()
@@ -31,15 +46,18 @@ public class SwordAttack : MonoBehaviour {
 	void	SwordAttacking()
 	{
 		Collider2D[] enemiesToAttack;
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButton(0))
 		{
 			//Create a circle and attack all enemies in it
 			enemiesToAttack = Physics2D.OverlapCircleAll(shotPoint.position, attackRadius);
 			for (int i = 0; i < enemiesToAttack.Length; i++)
 			{
 				//Checking if the collider in the circle is an enemy
-				if (enemiesToAttack[i].gameObject.tag == "Enemy")
-					enemiesToAttack[i].gameObject.GetComponent<EnemySystem>().TakeDamage(5f);
+				if (enemiesToAttack[i].gameObject.tag == "Enemy" && coolDown <= 0)
+				{
+					enemiesToAttack[i].gameObject.GetComponent<EnemySystem>().TakeDamage(15f);
+					coolDown = coolDownOri;
+				}
 			}
 		}
 	}
@@ -58,4 +76,20 @@ public class SwordAttack : MonoBehaviour {
 		float rotZ = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);  
 	}
+
+	void	Animate() //Animating the Fire Player
+	{
+		if (player.GetComponent<PlayerMovements>().dir_x == 0 && player.GetComponent<PlayerMovements>().dir_y == 0)
+			iceAnim.SetBool("Move", false);
+		else
+			iceAnim.SetBool("Move", true);
+
+		if (Input.GetMouseButton(0))
+			iceAnim.SetBool("Attack", true);
+		else
+			iceAnim.SetBool("Attack", false);
+	}
+
 }
+
+

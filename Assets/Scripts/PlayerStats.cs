@@ -19,18 +19,53 @@ public class PlayerStats : MonoBehaviour {
     [SerializeField]
     private float currHP;
 
+    [SerializeField]
+    private float typeCounter;
+
+    [SerializeField]
+    private GameObject ice;
+
+    [SerializeField]
+    private GameObject fire;
+
 	// Use this for initialization
 	void Start () {
 		//currHP = maxHP;
-        playerType = GameObject.Find("PlayerRange");
+        playerType = GameObject.Find("PlayerMelee");
         maxHP = playerType.GetComponent<PlayerType>().maxHealth;
         currHP = maxHP;
+        typeCounter = 0;
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
+        ManageType();
         HealthManager();
+        if (typeCounter < 20)
+            typeCounter += Time.deltaTime;
+        else if (typeCounter >= 20)
+            typeCounter = 0;
+       
 	}
+
+    void    ManageType()
+    {
+        if (typeCounter >= 0 && typeCounter < 10)
+        {
+            
+            fire.active = true;
+            ice.active = false;
+            playerType = GameObject.Find("PlayerRange");
+        }
+        else if (typeCounter >= 10f && typeCounter < 20)
+        {
+            
+            fire.active = false;
+            ice.active = true;
+            playerType = GameObject.Find("PlayerMelee");
+        }
+    }
 
     void    HealthManager()
     {

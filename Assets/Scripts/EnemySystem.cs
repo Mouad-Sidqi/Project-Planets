@@ -8,7 +8,7 @@ public class EnemySystem : MonoBehaviour {
     private GameObject healItem;
 
 	[SerializeField]
-	private	float	maxHP;
+	public	float	maxHP;
 
 	[SerializeField]
 	private	float	currHP;

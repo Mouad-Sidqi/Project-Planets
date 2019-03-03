@@ -11,7 +11,7 @@ public class EnemyMove : MonoBehaviour {
     [SerializeField]
     private float speed;
     [SerializeField]
-    private float agroSpeed;
+    public float agroSpeed;
     private Transform player;
     [SerializeField]
     private float stopingDistance;

@@ -18,5 +18,6 @@ public class MouseCurser : MonoBehaviour {
 		//float	y = Mathf.Lerp(this.transform.position.y, Input.mousePosition.y, lerpVal);
 
 		this.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
+		Cursor.visible = false;
 	}
 }
