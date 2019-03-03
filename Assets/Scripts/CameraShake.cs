@@ -6,13 +6,14 @@ public class CameraShake : MonoBehaviour {
 
 
     public Camera mainCam;
+    [SerializeField]
     float shakeAmount;
 	// Use this for initialization
-	void Awake()
+	/*void Awake()
 	{
         if (mainCam == null)
             mainCam = Camera.main;
-	}
+    }*/
 	public void Shake (float amt, float length)
     {
         shakeAmount = amt;
@@ -23,20 +24,22 @@ public class CameraShake : MonoBehaviour {
     {
         if (shakeAmount > 0)
         {
-            Vector3 camPos = mainCam.transform.position;
+            Vector3 camPos = this.transform.position;
 
-            float shakeAmtX = Random.value * shakeAmount * 2 - shakeAmount;
-            float shakeAmtY = Random.value * shakeAmount * 2 - shakeAmount;
+            //float shakeAmtX = Random.value * shakeAmount * 2 - shakeAmount;
+            //float shakeAmtY = Random.value * shakeAmount * 2 - shakeAmount;
+            float shakeAmtX = Random.Range(-1f, 1f) * shakeAmount;
+            float shakeAmtY = Random.Range(-1f, 1f) * shakeAmount;
             camPos.x += shakeAmtX;
             camPos.x += shakeAmtY;
 
-            mainCam.transform.position = camPos;
+            this.transform.position = camPos;
         }
         
     }
     public void StopShake()
     {
         CancelInvoke("BeginShake");
-        mainCam.transform.localPosition = Vector3.zero;
+        this.transform.localPosition = Vector3.zero;
     }
 }

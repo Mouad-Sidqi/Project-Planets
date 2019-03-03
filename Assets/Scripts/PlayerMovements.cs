@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class PlayerMovements : MonoBehaviour {
 
-	[SerializeField]
-	private	Animator anim;
+	//[SerializeField]
+	//private	Animator anim;
 
 	[SerializeField]
 	private	float speed;
 
-	private	int	dir_x;
-	private	int	dir_y;
+	public	int	dir_x;
+	public	int	dir_y;
 	private Rigidbody2D rb;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
-		anim = GetComponent<Animator>();
+		//anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		Move();
-		AttackAnimation();
+		//AttackAnimation();
 	}
 
 	void	Move()
@@ -43,21 +43,21 @@ public class PlayerMovements : MonoBehaviour {
 			dir_y = 0;
 
 		//This part is for the Move animation
-		if (dir_y == 0 && dir_x == 0)
+		/*if (dir_y == 0 && dir_x == 0)
 			anim.SetBool("Move", false);
 		else
-			anim.SetBool("Move", true);
+			anim.SetBool("Move", true);*/
 		//rb.AddForce(new Vector2(dir_x * speed, dir_y * speed));
-		rb.velocity = new Vector2(/*rb.velocity.x + */dir_x * speed,/* rb.velocity.y + */dir_y * speed);
+		rb.velocity = new Vector2(dir_x * speed, dir_y * speed);
 	}
 
-	void	AttackAnimation()
+	/*void	AttackAnimation()
 	{
 		//This part is for the Attack animation
 		if (Input.GetMouseButton(0))
 			anim.SetBool("Attack", true);
 		else
 			anim.SetBool("Attack", false);
-	}
+	}*/
 
 }

@@ -26,6 +26,9 @@ public class EnemySystem : MonoBehaviour {
 	private	float	attackCoolDownOri;
 
 	[SerializeField]
+	private	GameObject	bloodParts;
+
+	[SerializeField]
 	private	GameObject player;
 
 	// Use this for initialization
@@ -42,7 +45,9 @@ public class EnemySystem : MonoBehaviour {
         if (currHP <= 0)
         {
             if (Random.Range(0, 20) == 2)
-                Instantiate(healItem);
+                Instantiate(healItem, transform.position, transform.rotation);
+			GameObject temp = Instantiate(bloodParts, transform.position, transform.rotation);
+			Destroy(temp, 0.5f);
             Destroy(this.gameObject);
         }
         if (player.transform.position.y > this.transform.position.y)

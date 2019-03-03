@@ -28,6 +28,9 @@ public class EnemyMove : MonoBehaviour {
     private float   patrolTime;
     Vector2 movePos = Vector2.zero;
 
+    [SerializeField]
+    private Animator enemyAnim;
+
 
 
 
@@ -37,6 +40,7 @@ public class EnemyMove : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();       
         origin = transform.position;
         patrolTime = patrolCoolDown;
+        enemyAnim = GetComponent<Animator>();
         //direction = Random.Range(1, 8);
 	}
 	
@@ -50,12 +54,24 @@ public class EnemyMove : MonoBehaviour {
             isAgro = true;
         else
             isAgro = false;
+        
         if (isAgro)
+        {
+            enemyAnim.SetBool("Attack", false);
             rb.velocity = (player.position - this.transform.position) * agroSpeed;
+        }
         else if (Distance > stopingDistance)
+        {
             Patrol();
+            enemyAnim.SetBool("Attack", false);
+        }
+        else if (Distance < stopingDistance)
+            enemyAnim.SetBool("Attack", true);
         else
+        {
+            enemyAnim.SetBool("Attack", false);
             rb.velocity = Vector2.zero;
+        }
 
 	}
 
