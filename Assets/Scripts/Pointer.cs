@@ -25,10 +25,14 @@ public class Pointer : MonoBehaviour {
 		coolDownOri = coolDown;
 	}
 
-	void	FixedUpdate()
+	void	Update()
 	{
-		MoveAround();
+		
 		FireBall();
+	}
+	void FixedUpdate()
+	{
+        MoveAround();
 	}
 
 	IEnumerator	FireParts()
@@ -40,17 +44,19 @@ public class Pointer : MonoBehaviour {
 
 	void	FireBall()
 	{
-		if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
 		{
-			if (coolDown <= 0)
+            if (coolDown <= 0 || Input.GetMouseButtonDown(0))
 			{
 				Instantiate(fireBall, shotPoint.position, transform.rotation);
 				coolDown = coolDownOri;
 				StartCoroutine(FireParts());
 			}
-			else
+            else
 				coolDown -= Time.deltaTime;
 		}
+        else 
+            coolDown = coolDownOri;
 
 	}
 

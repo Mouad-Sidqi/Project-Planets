@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Borders
   - LayerToDetectAllObjectsExceptPlayer
+  - Heal
   layers:
   - Default
   - TransparentFX

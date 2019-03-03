@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class PlayerStats : MonoBehaviour {
 
 	[SerializeField]
+    private float healAmount;
+    [SerializeField]
 	private	Image healthBar;
 
 	[SerializeField]
@@ -13,8 +15,8 @@ public class PlayerStats : MonoBehaviour {
 
 	[SerializeField]
 	private	float maxHP;
-
-	private float currHP;
+    [SerializeField]
+    private float currHP;
 
 	// Use this for initialization
 	void Start () {
@@ -24,8 +26,8 @@ public class PlayerStats : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, currHP / maxHP, lerpSpeed);
-		if (currHP <= 0)
-			Destroy(this.gameObject);
+        if (currHP <= 0)
+            Destroy(this.gameObject);
 	}
 
 	public	void	TakeDamage(float damage)
@@ -33,4 +35,20 @@ public class PlayerStats : MonoBehaviour {
 		currHP -= damage;
 	}
 
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Heal")
+        {
+            if (currHP + healAmount <= maxHP)
+            {
+                currHP += healAmount;
+                Destroy(col.gameObject);
+            }
+            else {
+                currHP = maxHP;
+                Destroy(col.gameObject);
+            }
+        }
+    }
 }
