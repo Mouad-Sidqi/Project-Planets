@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class EnemySystem : MonoBehaviour {
+    [SerializeField]
+    private GameObject healItem;
 
 	[SerializeField]
 	private	float	maxHP;
@@ -37,9 +39,13 @@ public class EnemySystem : MonoBehaviour {
 	void FixedUpdate () {
 		DamagePlayer();
 		healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, currHP / maxHP, lerpSpeed);
-		if (currHP <= 0)
-			Destroy(this.gameObject);
-		if (player.transform.position.y > this.transform.position.y)
+        if (currHP <= 0)
+        {
+            if (Random.Range(0, 20) == 2)
+                Instantiate(healItem);
+            Destroy(this.gameObject);
+        }
+        if (player.transform.position.y > this.transform.position.y)
 			this.GetComponent<SpriteRenderer>().sortingOrder = 3;
 		else
 			this.GetComponent<SpriteRenderer>().sortingOrder = 1;

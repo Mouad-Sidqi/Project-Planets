@@ -8,6 +8,7 @@ TagManager:
   - Borders
   - LayerToDetectAllObjectsExceptPlayer
   - Heal
+  - Pointer
   layers:
   - Default
   - TransparentFX

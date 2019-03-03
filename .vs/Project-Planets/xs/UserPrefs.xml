@@ -1,15 +1,16 @@
 ﻿<Properties StartupConfiguration="{A9F1460D-C3F7-0256-0A14-141333C847E1}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemySystem.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/HealItem.cs">
     <Files>
       <File FileName="Assets/Scripts/PlayerMovements.cs" Line="19" Column="20" />
       <File FileName="Assets/Scripts/MouseCurser.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/CameraMovments.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/FireBall.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Pointer.cs" Line="33" Column="2" />
-      <File FileName="Assets/Scripts/EnemyMove.cs" Line="83" Column="50" />
-      <File FileName="Assets/Scripts/CameraShake.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PlayerStats.cs" Line="41" Column="40" />
-      <File FileName="Assets/Scripts/EnemySystem.cs" Line="39" Column="65" />
+      <File FileName="Assets/Scripts/Pointer.cs" Line="64" Column="76" />
+      <File FileName="Assets/Scripts/CameraShake.cs" Line="37" Column="12" />
+      <File FileName="Assets/Scripts/EnemyMove.cs" Line="37" Column="50" />
+      <File FileName="Assets/Scripts/PlayerStats.cs" Line="46" Column="7" />
+      <File FileName="Assets/Scripts/EnemySystem.cs" Line="45" Column="24" />
+      <File FileName="Assets/HealItem.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

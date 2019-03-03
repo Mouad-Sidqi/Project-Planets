@@ -35,8 +35,15 @@ public class PlayerStats : MonoBehaviour {
 		currHP -= damage;
 	}
 
+    public  void    Heal(float heal)
+    {
+        currHP += heal;
+        if (currHP > maxHP)
+            currHP = maxHP;
+    }
 
-    private void OnTriggerEnter2D(Collider2D col)
+
+    /*private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Heal")
         {
@@ -50,5 +57,5 @@ public class PlayerStats : MonoBehaviour {
                 Destroy(col.gameObject);
             }
         }
-    }
+    }*/
 }

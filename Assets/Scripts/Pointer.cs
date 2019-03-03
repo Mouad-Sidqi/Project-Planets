@@ -19,9 +19,17 @@ public class Pointer : MonoBehaviour {
 	private	float	coolDown;
     [SerializeField]
 	private	float	coolDownOri;
+    [SerializeField]
+    CameraShake cameraShake;
+    GameObject objectWithScript;
+
 
 	void	Start()
 	{
+        //cameraShake = GameObject.FindGameObjectWithTag("Pointer").GetComponent<CameraShake>();
+        //cameraShake = objectWithScript.GetComponent<CameraShake>();
+        //cameraShake = GetComponent<CameraShake>();
+            
 		coolDownOri = coolDown;
 	}
 
@@ -48,6 +56,8 @@ public class Pointer : MonoBehaviour {
 		{
             if (coolDown <= 0 || Input.GetMouseButtonDown(0))
 			{
+               // cameraShake.gameObject.  
+             //   BeginShake(0.1f, 0.2f);
 				Instantiate(fireBall, shotPoint.position, transform.rotation);
 				coolDown = coolDownOri;
 				StartCoroutine(FireParts());
