@@ -55,7 +55,14 @@ public class SwordAttack : MonoBehaviour {
 				//Checking if the collider in the circle is an enemy
 				if (enemiesToAttack[i].gameObject.tag == "Enemy" && coolDown <= 0)
 				{
-					enemiesToAttack[i].gameObject.GetComponent<EnemySystem>().TakeDamage(15f);
+					enemiesToAttack[i].gameObject.GetComponent<EnemySystem>().TakeDamage(player.GetComponent<PlayerStats>().strenght);
+					player.GetComponent<PlayerStats>().Heal(5f);
+					coolDown = coolDownOri;
+				}
+				else if (enemiesToAttack[i].gameObject.tag == "Boss1" && coolDown <= 0)
+				{
+					enemiesToAttack[i].gameObject.GetComponent<Boss1>().TakeDamage(player.GetComponent<PlayerStats>().strenght);
+					player.GetComponent<PlayerStats>().Heal(player.GetComponent<PlayerStats>().strenght / 5);
 					coolDown = coolDownOri;
 				}
 			}

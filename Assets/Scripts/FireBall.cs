@@ -11,6 +11,8 @@ public class FireBall : MonoBehaviour {
 	private float timeToDes;
 	private	Vector3 mousePos;
 	private	Rigidbody2D	rb;
+
+	private PlayerStats player;
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
@@ -18,6 +20,7 @@ public class FireBall : MonoBehaviour {
 		mousePos = Input.mousePosition;
 		mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 		rb.AddRelativeForce(Vector2.up * speed);
+		player = GameObject.Find("Player").GetComponent<PlayerStats>();
 	}
 	
 	// Update is called once per frame
@@ -35,7 +38,12 @@ public class FireBall : MonoBehaviour {
 	{
 		if (coll.gameObject.tag == "Enemy")
 		{
-			coll.gameObject.GetComponent<EnemySystem>().TakeDamage(5f);
+			coll.gameObject.GetComponent<EnemySystem>().TakeDamage(player.strenght * 2);
+			Destroy(this.gameObject);
+		}
+		else if (coll.gameObject.tag == "Boss1")
+		{
+			coll.gameObject.GetComponent<Boss1>().TakeDamage(player.strenght * 2);
 			Destroy(this.gameObject);
 		}
 	}

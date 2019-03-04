@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour {
+
+    private static bool playerExist = false;
 
     [SerializeField]
     private GameObject playerType;
@@ -32,11 +35,22 @@ public class PlayerStats : MonoBehaviour {
     private GameObject fire;
 
     [SerializeField]
+    private GameObject elec;
+
+    [SerializeField]
     private float typeTimer;
+
+    [SerializeField]
+    public float strenght;
 
 	// Use this for initialization
 	void Start () {
 		//currHP = maxHP;
+        DontDestroyOnLoad(this.gameObject);
+        if (playerExist)
+            Destroy(this.gameObject);
+        else
+            playerExist = true;
         playerType = GameObject.Find("PlayerMelee");
         maxHP = playerType.GetComponent<PlayerType>().maxHealth;
         currHP = maxHP;
@@ -49,9 +63,9 @@ public class PlayerStats : MonoBehaviour {
 	void Update () {
         ManageType();
         HealthManager();
-        if (typeCounter < 20)
+        if (typeCounter < 30)
             typeCounter += Time.deltaTime;
-        else if (typeCounter >= 20)
+        else if (typeCounter >= 30)
             typeCounter = 0;
         timeBar.fillAmount = typeTimer / 10;
         typeTimer -= Time.deltaTime;
@@ -64,7 +78,8 @@ public class PlayerStats : MonoBehaviour {
             
             fire.active = true;
             ice.active = false;
-            playerType = GameObject.Find("PlayerRange");
+            elec.active = false;
+            playerType = fire;
             if (typeTimer <= 0)
                 typeTimer = 10;
         }
@@ -73,7 +88,17 @@ public class PlayerStats : MonoBehaviour {
             
             fire.active = false;
             ice.active = true;
-            playerType = GameObject.Find("PlayerMelee");
+            elec.active = false;
+            playerType = ice;
+            if (typeTimer <= 0)
+                typeTimer = 10;
+        }
+        else if (typeCounter >= 20 && typeCounter < 30)
+        {
+            fire.active = false;
+            ice.active = false;
+            elec.active = true;
+            playerType = elec;
             if (typeTimer <= 0)
                 typeTimer = 10;
         }
@@ -84,7 +109,11 @@ public class PlayerStats : MonoBehaviour {
         maxHP = playerType.GetComponent<PlayerType>().maxHealth;
 		healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, currHP / maxHP, lerpSpeed);
         if (currHP <= 0)
+        {
+            playerExist = false;
             Destroy(this.gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
         if (currHP > maxHP)
             currHP = maxHP;
     }

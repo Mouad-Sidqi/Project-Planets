@@ -16,6 +16,7 @@ public class PlayerMovements : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		this.transform.position = Vector3.zero;
 		rb = GetComponent<Rigidbody2D>();
 		//anim = GetComponent<Animator>();
 	}

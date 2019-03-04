@@ -33,9 +33,14 @@ public class EnemySystem : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		maxHP = Random.Range(15f,30f);
 		currHP = maxHP;
 		attackCoolDownOri = attacCoolDown;
-		player = GameObject.FindGameObjectWithTag("Player");
+		player = GameObject.Find("Player");
+		transform.localScale = new Vector3(0.3f * maxHP / 20f, 0.3f * maxHP / 20f, 0f);
+		gameObject.GetComponent<EnemyMove>().agroSpeed = 3 - (maxHP / 20f) * 2;
+		if (gameObject.GetComponent<EnemyMove>().agroSpeed < 1)
+			gameObject.GetComponent<EnemyMove>().agroSpeed = 1;
 	}
 	
 	// Update is called once per frame
@@ -44,10 +49,12 @@ public class EnemySystem : MonoBehaviour {
 		healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, currHP / maxHP, lerpSpeed);
         if (currHP <= 0)
         {
+			player.GetComponent<PlayerStats>().strenght += 0.05f;
             if (Random.Range(0, 20) == 2)
                 Instantiate(healItem, transform.position, transform.rotation);
 			GameObject temp = Instantiate(bloodParts, transform.position, transform.rotation);
 			Destroy(temp, 0.5f);
+			
             Destroy(this.gameObject);
         }
         if (player.transform.position.y > this.transform.position.y)

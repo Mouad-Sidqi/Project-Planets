@@ -53,19 +53,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\ActivateFireBoss.cs" />
      <Compile Include="Assets\Scripts\AnimateBar.cs" />
+     <Compile Include="Assets\Scripts\Boss1.cs" />
+     <Compile Include="Assets\Scripts\Boss1Pointer.cs" />
      <Compile Include="Assets\Scripts\CameraMovments.cs" />
      <Compile Include="Assets\Scripts\CameraShake.cs" />
+     <Compile Include="Assets\Scripts\ElectricityAttack.cs" />
      <Compile Include="Assets\Scripts\EnemyMove.cs" />
      <Compile Include="Assets\Scripts\EnemySystem.cs" />
      <Compile Include="Assets\Scripts\FireBall.cs" />
+     <Compile Include="Assets\Scripts\FireBossAttack.cs" />
      <Compile Include="Assets\Scripts\HealItem.cs" />
+     <Compile Include="Assets\Scripts\KeepCanva.cs" />
      <Compile Include="Assets\Scripts\MouseCurser.cs" />
+     <Compile Include="Assets\Scripts\NextLevel.cs" />
      <Compile Include="Assets\Scripts\PlayerMovements.cs" />
      <Compile Include="Assets\Scripts\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\PlayerType.cs" />
      <Compile Include="Assets\Scripts\PointerFire.cs" />
      <Compile Include="Assets\Scripts\Spawner.cs" />
+     <Compile Include="Assets\Scripts\StartMenu.cs" />
+     <Compile Include="Assets\Scripts\StartPoint.cs" />
      <Compile Include="Assets\Scripts\SwordAttack.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>/Users/helbouaz/Desktop/Project-Planets/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

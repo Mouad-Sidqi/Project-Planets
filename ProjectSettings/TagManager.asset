@@ -9,6 +9,8 @@ TagManager:
   - LayerToDetectAllObjectsExceptPlayer
   - Heal
   - Pointer
+  - Boss
+  - Boss1
   layers:
   - Default
   - TransparentFX

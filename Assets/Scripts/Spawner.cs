@@ -55,11 +55,11 @@ public class Spawner : MonoBehaviour {
 	void	SpawnEnemy()
 	{
 		GameObject temp =Instantiate(enemy, this.transform.position, this.transform.rotation);
-		EnemySystem enemysys = temp.GetComponent<EnemySystem>();
+		//EnemySystem enemysys = temp.GetComponent<EnemySystem>();
 		coolDown = timeBetweenSpawns;
-		enemysys.maxHP = Random.Range(15f,25f);
-		temp.transform.localScale = new Vector3(0.3f * enemysys.maxHP / 20f, 0.3f * enemysys.maxHP / 20f, 0f);
-		temp.GetComponent<EnemyMove>().agroSpeed = 3 - (enemysys.maxHP / 20f) * 2;
+		//enemysys.maxHP = Random.Range(15f,25f);
+		//temp.transform.localScale = new Vector3(0.3f * enemysys.maxHP / 20f, 0.3f * enemysys.maxHP / 20f, 0f);
+		//temp.GetComponent<EnemyMove>().agroSpeed = 3 - (enemysys.maxHP / 20f) * 2;
 	}
 
 }
