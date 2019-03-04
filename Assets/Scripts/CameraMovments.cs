@@ -7,18 +7,12 @@ public class CameraMovments : MonoBehaviour {
 	[SerializeField]
 	private	GameObject player;
 
-	private static bool cam1Exist = false;
 
 	[SerializeField]
 	private	float	lerpval;
 
 	// Use this for initialization
 	void Start () {
-		DontDestroyOnLoad(this.gameObject);
-		if (cam1Exist)
-			Destroy(this.gameObject);
-		else
-			cam1Exist = true;
 
 	}
 

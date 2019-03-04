@@ -37,7 +37,7 @@ public class EnemyMove : MonoBehaviour {
 	void Start () {
         isAgro = false;
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();       
+        player = GameObject.Find("Player").GetComponent<Transform>();       
         origin = transform.position;
         patrolTime = patrolCoolDown;
         enemyAnim = GetComponent<Animator>();

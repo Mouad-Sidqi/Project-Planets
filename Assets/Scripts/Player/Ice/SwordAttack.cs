@@ -46,26 +46,25 @@ public class SwordAttack : MonoBehaviour {
 	void	SwordAttacking()
 	{
 		Collider2D[] enemiesToAttack;
-		if (Input.GetMouseButton(0))
+		if (Input.GetMouseButton(0) && coolDown <= 0)
 		{
 			//Create a circle and attack all enemies in it
 			enemiesToAttack = Physics2D.OverlapCircleAll(shotPoint.position, attackRadius);
 			for (int i = 0; i < enemiesToAttack.Length; i++)
 			{
 				//Checking if the collider in the circle is an enemy
-				if (enemiesToAttack[i].gameObject.tag == "Enemy" && coolDown <= 0)
+				if (enemiesToAttack[i].gameObject.tag == "Enemy")
 				{
 					enemiesToAttack[i].gameObject.GetComponent<EnemySystem>().TakeDamage(player.GetComponent<PlayerStats>().strenght);
 					player.GetComponent<PlayerStats>().Heal(5f);
-					coolDown = coolDownOri;
 				}
-				else if (enemiesToAttack[i].gameObject.tag == "Boss1" && coolDown <= 0)
+				else if (enemiesToAttack[i].gameObject.tag == "Boss1")
 				{
 					enemiesToAttack[i].gameObject.GetComponent<Boss1>().TakeDamage(player.GetComponent<PlayerStats>().strenght);
-					player.GetComponent<PlayerStats>().Heal(player.GetComponent<PlayerStats>().strenght / 5);
-					coolDown = coolDownOri;
+					player.GetComponent<PlayerStats>().Heal(player.GetComponent<PlayerStats>().strenght / 10);
 				}
 			}
+			coolDown = coolDownOri;
 		}
 	}
 

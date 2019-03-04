@@ -5,7 +5,6 @@ using UnityEngine;
 public class CameraShake : MonoBehaviour {
 
 
-    private static bool camExist = false;
     [SerializeField]
     float shakeAmount;
 	// Use this for initialization
@@ -17,11 +16,7 @@ public class CameraShake : MonoBehaviour {
 
     void    Start()
     {
-        DontDestroyOnLoad(this.gameObject);
-        if (camExist)
-            Destroy(this.gameObject);
-        else
-            camExist = true;
+        
     }
 
 	public void Shake (float amt, float length)

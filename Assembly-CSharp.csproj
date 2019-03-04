@@ -57,9 +57,12 @@
      <Compile Include="Assets\Scripts\Boss\ActivateFireBoss.cs" />
      <Compile Include="Assets\Scripts\Boss\Boss1.cs" />
      <Compile Include="Assets\Scripts\Boss\Boss1Pointer.cs" />
+     <Compile Include="Assets\Scripts\Boss\Boss2.cs" />
      <Compile Include="Assets\Scripts\Boss\FireBossAttack.cs" />
+     <Compile Include="Assets\Scripts\Boss\IceBossAttack.cs" />
      <Compile Include="Assets\Scripts\CameraMovments.cs" />
      <Compile Include="Assets\Scripts\CameraShake.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\HealItem.cs" />
      <Compile Include="Assets\Scripts\KeepCanva.cs" />
      <Compile Include="Assets\Scripts\MouseCurser.cs" />

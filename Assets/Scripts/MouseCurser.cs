@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class MouseCurser : MonoBehaviour {
 
-	private static bool mouseCursorExist = false;
 
 	[SerializeField]
 	private float lerpVal;
 	// Use this for initialization
 	void Start () {
-		DontDestroyOnLoad(this.gameObject);
-		if (mouseCursorExist)
-			Destroy(this.gameObject);
-		else
-			mouseCursorExist = true;
+		
 	}
 	
 	// Update is called once per frame

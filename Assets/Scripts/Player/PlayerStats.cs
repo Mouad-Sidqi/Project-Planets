@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour {
 
-    private static bool playerExist = false;
 
     [SerializeField]
     private GameObject playerType;
@@ -23,7 +22,7 @@ public class PlayerStats : MonoBehaviour {
 	[SerializeField]
 	private	float maxHP;
     [SerializeField]
-    private float currHP;
+    public float currHP;
 
     [SerializeField]
     private float typeCounter;
@@ -43,14 +42,16 @@ public class PlayerStats : MonoBehaviour {
     [SerializeField]
     public float strenght;
 
+    [SerializeField]
+    private Image typesCir;
+
+    [SerializeField]
+    private float[] angles;
+
 	// Use this for initialization
 	void Start () {
 		//currHP = maxHP;
-        DontDestroyOnLoad(this.gameObject);
-        if (playerExist)
-            Destroy(this.gameObject);
-        else
-            playerExist = true;
+        
         playerType = GameObject.Find("PlayerMelee");
         maxHP = playerType.GetComponent<PlayerType>().maxHealth;
         currHP = maxHP;
@@ -81,6 +82,7 @@ public class PlayerStats : MonoBehaviour {
             ice.active = false;
             elec.active = true;
             playerType = elec;
+            typesCir.rectTransform.rotation = Quaternion.Euler(0f, 0f, Mathf.Lerp(angles[0], typesCir.rectTransform.rotation.z, 0.01f));
             if (typeTimer <= 0)
                 typeTimer = 10;
         }
@@ -91,6 +93,7 @@ public class PlayerStats : MonoBehaviour {
             ice.active = true;
             elec.active = false;
             playerType = ice;
+            typesCir.rectTransform.rotation = Quaternion.Euler(0f, 0f, Mathf.Lerp(angles[1], typesCir.rectTransform.rotation.z, 0.01f));
             if (typeTimer <= 0)
                 typeTimer = 10;
         }
@@ -100,6 +103,7 @@ public class PlayerStats : MonoBehaviour {
             ice.active = false;
             elec.active = false;
             playerType = fire;
+            typesCir.rectTransform.rotation = Quaternion.Euler(0f, 0f, Mathf.Lerp(angles[2], typesCir.rectTransform.rotation.z, 0.01f));;
             if (typeTimer <= 0)
                 typeTimer = 10;
         }
@@ -111,9 +115,9 @@ public class PlayerStats : MonoBehaviour {
 		healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, currHP / maxHP, lerpSpeed);
         if (currHP <= 0)
         {
-            playerExist = false;
-            Destroy(this.gameObject);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //Destroy(this.gameObject);
+            
         }
         if (currHP > maxHP)
             currHP = maxHP;

@@ -71,7 +71,7 @@ public class Boss1 : MonoBehaviour {
 
 	void	Fire()
 	{	
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < shotPoints.Length; i++)
 			Instantiate(attack, shotPoints[i].transform.position, shotPoints[i].transform.rotation);
 	}
 

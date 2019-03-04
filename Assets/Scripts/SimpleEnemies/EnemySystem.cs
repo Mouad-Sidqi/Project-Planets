@@ -38,8 +38,8 @@ public class EnemySystem : MonoBehaviour {
 		attackCoolDownOri = attacCoolDown;
 		player = GameObject.Find("Player");
 		transform.localScale = new Vector3(0.3f * maxHP / 20f, 0.3f * maxHP / 20f, 0f);
-		gameObject.GetComponent<EnemyMove>().agroSpeed = 3 - (maxHP / 20f) * 2;
-		if (gameObject.GetComponent<EnemyMove>().agroSpeed < 1)
+		gameObject.GetComponent<EnemyMove>().agroSpeed = 5 - (maxHP / 20f) * 2;
+		if (gameObject.GetComponent<EnemyMove>().agroSpeed < 2)
 			gameObject.GetComponent<EnemyMove>().agroSpeed = 1;
 	}
 	
